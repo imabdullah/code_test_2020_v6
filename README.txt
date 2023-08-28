@@ -42,4 +42,48 @@ OR
 
 Thank you!
 
+------------------------------------------------------Comments--------------------------------------------------------------------
 
+I did following code refectoring, 
+
+--BookingController--
+index():
+instead of using long name twice, assign its value to a variable and use the variable : $userType = $request->__authenticatedUser->user_type;
+
+update function():
+no need to use array_except instead directly exclude specific keys from the $data
+
+immediateJobEmail():
+minor changes, removed unused variables
+
+getHistory():
+to keep it simple, assignment is moved before condition
+
+distanceFeed(): 
+inline condtion(ternary expression) can be used instead of if-else 
+
+
+---BookingRepository---
+changed variable names to have consistency like changing $noramlJobs to $normal_jobs.
+proper comparison === instead of ==
+condition checks for $cuser first instead of checking in both if and elseif
+Removed the unused variables $page_num and $num_pages  
+inline condition instead of if else
+removed commented code
+
+Functions/Methods should be smaller as possible, to do relevent task only as it name suggest
+
+store() function is divided in two functions validateCustomerData() & processCustomerData()
+validateCustomerData() :  to process validation, it will be easier to handle validation if we have to add more validation or change   
+processCustomerData: will be easier to handle customer data sepratly 
+
+And processCustomerData() is split into further another function called createJob() to handle job related stuff
+
+Similary storeJobEmail() is divided in 2 different functions updateJobInfo() & jobCreated()
+
+
+sendJobEndedEmail() is created and used twice in a same function to send emails from same function jobEnd()
+calculateTimeDifference() can be used again 
+
+
+simmilary same refectoring rules can be applied to refector the rest of functions 
